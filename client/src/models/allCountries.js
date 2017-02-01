@@ -10,11 +10,12 @@ AllCountries.prototype = {
     request.onload = callback;
     request.send();
   },
-  popCountriesList: function(){
+  popCountriesList: function(callback){
     this.makeRequest("https://restcountries.eu/rest/v1/all", function(){
-      var countries = JSON.parse(this.responseText);
-      console.log(countries);
-    })
+      this.countries = JSON.parse(this.responseText);
+      // console.log(this.countries);
+      callback(JSON.parse(this.responseText));
+    });
   }
 }
 

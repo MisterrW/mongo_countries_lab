@@ -1,12 +1,9 @@
-var AllCountries = require('./models/allCountries');
+var Ui = require('./views/ui');
 
 var app = function(){
 	console.log("Hello there");
 	console.log("I'm alive!");
-  var allCountries = new AllCountries();
-  allCountries.popCountriesList();
-
-
+  new Ui();
 }
 window.onload = app;
 

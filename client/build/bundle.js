@@ -44,15 +44,12 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var AllCountries = __webpack_require__(1);
+	var Ui = __webpack_require__(1);
 	
 	var app = function(){
 		console.log("Hello there");
 		console.log("I'm alive!");
-	  var allCountries = new AllCountries();
-	  allCountries.popCountriesList();
-	
-	
+	  new Ui();
 	}
 	window.onload = app;
 	
@@ -65,6 +62,45 @@
 
 /***/ },
 /* 1 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var AllCountries = __webpack_require__(2);
+	
+	var Ui = function(){
+	  this.allCountries = new AllCountries();
+	  this.popList();
+	  // this.displayCountries();
+	}
+	
+	Ui.prototype = {
+	  popList: function(){
+	    // console.log(this.allCountries);
+	    this.allCountries.popCountriesList(this.displayCountries.bind(this));
+	  },
+	  displayCountries: function(countries){
+	    console.log("allCountries: " + this.allCountries);
+	    console.log(countries);
+	    var countriesList = document.createElement('ul');
+	    for (country of countries){
+	      var li = document.createElement('li');
+	      // console.log(country.name);
+	      li.innerText = country.name;
+	      countriesList.appendChild(li);
+	    }
+	    // console.log(document);
+	    // console.log(countriesList);
+	    var container = document.getElementById('container');
+	    var thing = document.createElement('p');
+	    thing.innerText = "yep!";
+	    container.appendChild(thing);
+	    container.appendChild(countriesList);
+	  }
+	}
+	
+	module.exports = Ui;
+
+/***/ },
+/* 2 */
 /***/ function(module, exports) {
 
 	var AllCountries = function(){
@@ -79,11 +115,12 @@
 	    request.onload = callback;
 	    request.send();
 	  },
-	  popCountriesList: function(){
+	  popCountriesList: function(callback){
 	    this.makeRequest("https://restcountries.eu/rest/v1/all", function(){
-	      var countries = JSON.parse(this.responseText);
-	      console.log(countries);
-	    })
+	      this.countries = JSON.parse(this.responseText);
+	      // console.log(this.countries);
+	      callback(JSON.parse(this.responseText));
+	    });
 	  }
 	}
 	
