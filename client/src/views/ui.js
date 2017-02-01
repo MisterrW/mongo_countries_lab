@@ -2,7 +2,13 @@ var AllCountries = require('../models/allCountries');
 
 var Ui = function(){
   this.allCountries = new AllCountries();
+  this.countriesList = document.createElement('select');
+  this.bucket = document.createElement('ul');
+  this.container = document.getElementById('container');
+  this.container.appendChild(this.countriesList);
+  this.container.appendChild(this.bucket);
   this.popList();
+
   // this.displayCountries();
 }
 
@@ -14,21 +20,30 @@ Ui.prototype = {
   displayCountries: function(countries){
     console.log("allCountries: " + this.allCountries);
     console.log(countries);
-    var countriesList = document.createElement('ul');
+    console.log(this)
     for (country of countries){
-      var li = document.createElement('li');
+      var option = document.createElement('option');
       // console.log(country.name);
-      li.innerText = country.name;
-      countriesList.appendChild(li);
+      option.innerText = country.name;
+      this.countriesList.appendChild(option);
     }
     // console.log(document);
     // console.log(countriesList);
     var container = document.getElementById('container');
-    var thing = document.createElement('p');
-    thing.innerText = "yep!";
-    container.appendChild(thing);
-    container.appendChild(countriesList);
+    container.appendChild(this.countriesList);
+    var button = document.createElement('button');
+    button.innerText = "add to list";
+    container.appendChild(button);
+    button.onclick = this.addToBucket.bind(this);
+  },
+  addToBucket: function(){
+    console.log(this.countriesList);
+    // alert(this.countriesList.value);
+    var li = document.createElement('li');
+    li.innerText = this.countriesList.value;
+    this.bucket.appendChild(li);
   }
+
 }
 
 module.exports = Ui;
