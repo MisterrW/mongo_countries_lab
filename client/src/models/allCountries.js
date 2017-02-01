@@ -19,6 +19,7 @@ AllCountries.prototype = {
   },
   saveToBucket: function(country){
     console.log("what?");
+    http://localhost:3000/
   }
 };
 

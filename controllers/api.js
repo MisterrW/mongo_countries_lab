@@ -17,5 +17,13 @@ countryRouter.get('/:id', function(req, res) {
   });
 });
 
+countryRouter.post('/', function(req, res) {
+	console.log(req);
+	
+  // dbQuery.one(function(id, results){    
+  // 	res.json(results);
+  // });
+});
+
 
 module.exports = countryRouter;

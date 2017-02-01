@@ -132,31 +132,7 @@ module.exports = Ui;
 /* 1 */
 /***/ (function(module, exports) {
 
-
-var AllCountries = function(){
-  this.countries = [];
-}
-
-AllCountries.prototype = {
-  makeRequest: function(url, callback){
-    var request = new XMLHttpRequest();
-    request.open("GET", url);
-    request.onload = callback;
-    request.send();
-  },
-  popCountriesList: function(callback){
-    this.makeRequest("https://restcountries.eu/rest/v1/all", function(){
-      this.countries = JSON.parse(this.responseText);
-      // console.log(this.countries);
-      callback(JSON.parse(this.responseText));
-    });
-  },
-  saveToBucket: function(country){
-    console.log("what?");
-  }
-};
-
-module.exports = AllCountries;
+throw new Error("Module parse failed: /Users/will/Desktop/mongo_countries_lab/client/src/models/allCountries.js Unexpected token (23:2)\nYou may need an appropriate loader to handle this file type.\n|     console.log(\"what?\");\n|     http://localhost:3000/\n|   }\n| };\n| ");
 
 /***/ }),
 /* 2 */
