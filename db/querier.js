@@ -4,6 +4,7 @@ var DbQuery = function(){
   this.url = 'mongodb://localhost:27017/bucket_list';
   this.name = "DbQuery object";
   this.countryName = null;
+  this.country = null;
 }
 
 DbQuery.prototype = {
@@ -28,6 +29,16 @@ DbQuery.prototype = {
           console.log(docs);
           onQueryFinished(docs);
         });
+      }
+    }.bind(this));
+  },
+  save: function(country, onQueryFinished){
+    this.country = country;
+     MongoClient.connect(this.url, function(err, db) {
+      if(db){
+        // console.log(this.name);÷ß
+        var collection = db.collection('countries'); 
+        collection.insert(country);
       }
     }.bind(this));
   }

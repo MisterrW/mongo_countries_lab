@@ -3,6 +3,7 @@ var AllCountries = require('../models/allCountries');
 var Ui = function(){
   this.allCountries = new AllCountries();
   this.countriesList = document.createElement('select');
+  this.countries = [];
   this.bucket = document.createElement('ul');
   this.container = document.getElementById('container');
   this.container.appendChild(this.countriesList);
@@ -22,6 +23,7 @@ Ui.prototype = {
     console.log(countries);
     console.log(this)
     for (country of countries){
+      this.countries = countries;
       var option = document.createElement('option');
       // console.log(country.name);
       option.innerText = country.name;
@@ -37,11 +39,17 @@ Ui.prototype = {
     button.onclick = this.addToBucket.bind(this);
   },
   addToBucket: function(){
-    console.log(this.countriesList);
+    console.log(this.countries);
     // alert(this.countriesList.value);
     var li = document.createElement('li');
     li.innerText = this.countriesList.value;
     this.bucket.appendChild(li);
+    for (country of this.countries){
+      console.log(country)
+      if(country.name === this.countriesList.value){
+        this.allCountries.saveToBucket(country);
+      }
+    }
   }
 
 }

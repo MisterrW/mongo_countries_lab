@@ -1,6 +1,6 @@
+
 var AllCountries = function(){
   this.countries = [];
-  // var url = 
 }
 
 AllCountries.prototype = {
@@ -16,7 +16,10 @@ AllCountries.prototype = {
       // console.log(this.countries);
       callback(JSON.parse(this.responseText));
     });
+  },
+  saveToBucket: function(country){
+    console.log("what?");
   }
-}
+};
 
 module.exports = AllCountries;
