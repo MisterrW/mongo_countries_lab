@@ -18,12 +18,11 @@ countryRouter.get('/:id', function(req, res) {
 });
 
 countryRouter.post('/', function(req, res) {
-	console.log(req);
-	
-  // dbQuery.one(function(id, results){    
-  // 	res.json(results);
-  // });
+	console.log("in the post api endpoint");
+  console.log(req);	
+  dbQuery.save(req);
 });
+
 
 
 module.exports = countryRouter;

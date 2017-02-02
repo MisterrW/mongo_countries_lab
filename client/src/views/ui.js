@@ -20,8 +20,8 @@ Ui.prototype = {
   },
   displayCountries: function(countries){
     console.log("allCountries: " + this.allCountries);
-    console.log(countries);
-    console.log(this)
+    // console.log(countries);
+    console.log(this);
     for (country of countries){
       this.countries = countries;
       var option = document.createElement('option');
@@ -39,14 +39,17 @@ Ui.prototype = {
     button.onclick = this.addToBucket.bind(this);
   },
   addToBucket: function(){
-    console.log(this.countries);
+    console.log("inBucketFunct");
+    console.log("countries: " + this.countries);
     // alert(this.countriesList.value);
     var li = document.createElement('li');
     li.innerText = this.countriesList.value;
     this.bucket.appendChild(li);
     for (country of this.countries){
-      console.log(country)
       if(country.name === this.countriesList.value){
+        console.log("inloop");
+        console.log("country:" + country);
+        console.log(country);
         this.allCountries.saveToBucket(country);
       }
     }

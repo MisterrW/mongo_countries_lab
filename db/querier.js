@@ -32,7 +32,8 @@ DbQuery.prototype = {
       }
     }.bind(this));
   },
-  save: function(country, onQueryFinished){
+  save: function(country){
+    console.log("hello");
     this.country = country;
      MongoClient.connect(this.url, function(err, db) {
       if(db){
