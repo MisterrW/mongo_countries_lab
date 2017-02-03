@@ -12,11 +12,17 @@ AllCountries.prototype = {
     request.send();
   },
   sendRequest: function(url, body){
+    console.log(body);
     var request = new XMLHttpRequest();
     request.open("POST", url);
     request.setRequestHeader("Content-Type", "application/json");
-    request.send(body);
+    var data = JSON.stringify(body)
+    request.onload = function(){
+      console.log("completed");
+    }
+;    request.send(data);
 
+    // console.log(JSON.stringify(body));
   },
   popCountriesList: function(callback){
     this.makeRequest("https://restcountries.eu/rest/v1/all", function(){

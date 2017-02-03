@@ -81,28 +81,19 @@ var Ui = function(){
   this.container.appendChild(this.countriesList);
   this.container.appendChild(this.bucket);
   this.popList();
-
-  // this.displayCountries();
 }
 
 Ui.prototype = {
   popList: function(){
-    // console.log(this.allCountries);
     this.allCountries.popCountriesList(this.displayCountries.bind(this));
   },
   displayCountries: function(countries){
-    console.log("allCountries: " + this.allCountries);
-    // console.log(countries);
-    console.log(this);
     for (country of countries){
       this.countries = countries;
       var option = document.createElement('option');
-      // console.log(country.name);
       option.innerText = country.name;
       this.countriesList.appendChild(option);
     }
-    // console.log(document);
-    // console.log(countriesList);
     var container = document.getElementById('container');
     container.appendChild(this.countriesList);
     var button = document.createElement('button');
@@ -111,17 +102,11 @@ Ui.prototype = {
     button.onclick = this.addToBucket.bind(this);
   },
   addToBucket: function(){
-    console.log("inBucketFunct");
-    console.log("countries: " + this.countries);
-    // alert(this.countriesList.value);
     var li = document.createElement('li');
     li.innerText = this.countriesList.value;
     this.bucket.appendChild(li);
     for (country of this.countries){
       if(country.name === this.countriesList.value){
-        console.log("inloop");
-        console.log("country:" + country);
-        console.log(country);
         this.allCountries.saveToBucket(country);
       }
     }
@@ -149,11 +134,17 @@ AllCountries.prototype = {
     request.send();
   },
   sendRequest: function(url, body){
+    console.log(body);
     var request = new XMLHttpRequest();
     request.open("POST", url);
     request.setRequestHeader("Content-Type", "application/json");
-    request.send(body);
+    var data = JSON.stringify(body)
+    request.onload = function(){
+      console.log("completed");
+    }
+;    request.send(data);
 
+    // console.log(JSON.stringify(body));
   },
   popCountriesList: function(callback){
     this.makeRequest("https://restcountries.eu/rest/v1/all", function(){
@@ -178,18 +169,10 @@ module.exports = AllCountries;
 var Ui = __webpack_require__(0);
 
 var app = function(){
-	console.log("Hello there");
-	console.log("I'm alive!");
-  new Ui();
+  var ui = new Ui();
 }
 window.onload = app;
 
-// var makeRequest = function(url, callback){
-//   var request = new XMLHttpRequest();
-//   request.open("GET", url);
-//   request.onload = callback;
-//   request.send();
-// }
 
 /***/ })
 /******/ ]);

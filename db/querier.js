@@ -13,7 +13,6 @@ DbQuery.prototype = {
       if(db){
         var collection = db.collection('countries'); 
         collection.find().toArray(function(err, docs) {
-          console.log(docs);
           onQueryFinished(docs);
         });
       }
@@ -23,25 +22,18 @@ DbQuery.prototype = {
     this.countryName = countryName;
     MongoClient.connect(this.url, function(err, db) {
       if(db){
-        console.log(this.name);
         var collection = db.collection('countries'); 
         collection.find().toArray(function(err, docs) {
-          console.log(docs);
           onQueryFinished(docs);
         });
       }
     }.bind(this));
   },
   save: function(country){
-    console.log("hello");
     this.country = country;
      MongoClient.connect(this.url, function(err, db) {
       if(db){
-        // console.log(this.name);÷ß
         var collection = db.collection('countries'); 
-        // console.log(country);
-        // console.log(db);
-        // console.log(collection);
         console.log(collection.insert(country));
       }
     }.bind(this));
