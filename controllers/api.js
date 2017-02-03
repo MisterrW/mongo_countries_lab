@@ -19,8 +19,9 @@ countryRouter.get('/:id', function(req, res) {
 
 countryRouter.post('/', function(req, res) {
 	console.log("in the post api endpoint");
-  console.log(req);	
-  dbQuery.save(req);
+  var reqText = req.body;
+  console.log(reqText);	
+  dbQuery.save(reqText);
 });
 
 

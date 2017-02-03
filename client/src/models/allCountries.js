@@ -13,7 +13,7 @@ AllCountries.prototype = {
   },
   sendRequest: function(url, body){
     var request = new XMLHttpRequest();
-    request.open("GET", url);
+    request.open("POST", url);
     request.setRequestHeader("Content-Type", "application/json");
     request.send(body);
 

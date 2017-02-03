@@ -39,7 +39,10 @@ DbQuery.prototype = {
       if(db){
         // console.log(this.name);÷ß
         var collection = db.collection('countries'); 
-        collection.insert(country);
+        // console.log(country);
+        // console.log(db);
+        // console.log(collection);
+        console.log(collection.insert(country));
       }
     }.bind(this));
   }
